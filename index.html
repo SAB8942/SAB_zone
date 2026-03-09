@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Design & Development Course</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main">
+    <div class="navbar">
+      <div class="icon">
+        <h2 class="logo">SAB </h2>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <form class="search">
+        <input type="text" class="srch" name="search" placeholder="Type To text">
+        <button class="btn" type="button">Search</button>
+      </form>
+    </div>
+    <div class="content">
+      <h2>Web Design & <br><span>Development</span><br> Course</h2>
+      <p class="par">Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br>Perferendis sint provident eius molestiae tempora temporibus <br>reiciendis magni at dicta illo labore iure earum animi, quasi in?<br> In culpa nostrum deserunt?</p>
+      <a class="cn" href="#contact">Get Started</a>
+      <div class="form">
+        <h2>Login Here</h2>
+        <form>
+          <input type="email" name="email" placeholder="Enter Email Here">
+          <input type="password" name="password" placeholder="Enter Password Here">
+          <a class="btnn" href="#contact">Login</a>
+        </form>
+        <p class="link">Don't have an account? <a href="#contact">Sign Up</a></p>
+        <p class="liw">Log in with your social media accounts</p>
+        <div class="icons">
+          <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+          <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+          <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+          <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+          <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
+          <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script>
+    // Form validation logic
+    const form = document.querySelector('.form form');
+    const emailInput = document.querySelector('input[name="email"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+    const loginButton = document.querySelector('.btnn');
+
+    // Email validation function
+    function validateEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    // Password validation function
+    function validatePassword(password) {
+      return password.length >= 6;
+    }
+
+    // Real-time email validation
+    emailInput.addEventListener('blur', function() {
+      if (this.value && !validateEmail(this.value)) {
+        this.style.borderColor = '#ff6b6b';
+        this.style.boxShadow = '0 0 10px rgba(255, 107, 107, 0.3)';
+      } else {
+        this.style.borderColor = '#febd68';
+        this.style.boxShadow = 'none';
+      }
+    });
+
+    // Real-time password validation
+    passwordInput.addEventListener('blur', function() {
+      if (this.value && !validatePassword(this.value)) {
+        this.style.borderColor = '#ff6b6b';
+        this.style.boxShadow = '0 0 10px rgba(255, 107, 107, 0.3)';
+      } else {
+        this.style.borderColor = '#febd68';
+        this.style.boxShadow = 'none';
+      }
+    });
+
+    // Form submission handling
+    loginButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      // Check if fields are empty
+      if (!email || !password) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      // Validate email
+      if (!validateEmail(email)) {
+        alert('Please enter a valid email address');
+        emailInput.focus();
+        return;
+      }
+
+      // Validate password
+      if (!validatePassword(password)) {
+        alert('Password must be at least 6 characters long');
+        passwordInput.focus();
+        return;
+      }
+
+      // If all validations pass
+      alert('Login successful!\nEmail: ' + email);
+      form.reset();
+      emailInput.style.borderColor = '#febd68';
+      passwordInput.style.borderColor = '#febd68';
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href !== '' && href !== '#contact') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Search button logic
+    const searchBtn = document.querySelector('.btn');
+    searchBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const searchInput = document.querySelector('.srch');
+      if (searchInput.value.trim()) {
+        alert('Searching for: ' + searchInput.value);
+        searchInput.value = '';
+      } else {
+        alert('Please enter search terms');
+      }
+    });
+
+    // Button click feedback
+    document.querySelectorAll('.cn, .btnn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        if (this.classList.contains('btnn')) {
+          // Prevent default for login button - handled above
+        }
+      });
+    });
+  </script>
+</body>
+</html>
